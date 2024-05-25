@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 class trd  implements Runnable{
-        JLabel label=new JLabel("adfsdf");
+        JLabel label=new JLabel("");
         boolean bool=false;
         int sayac=0;
         int stopper=2;
