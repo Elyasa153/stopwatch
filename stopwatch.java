@@ -74,7 +74,7 @@ class trd  implements Runnable{
 public class Stopwatch extends JFrame implements Runnable,ActionListener {
     JLabel start=new JLabel("PRESS TO START");
 JButton button=new JButton("START");
-JPanel panel=new JPanel();
+JLabel lap=new JLabel("");
     int sayac=0;
   trd trd=new trd();
   public Stopwatch(){
@@ -82,9 +82,12 @@ JPanel panel=new JPanel();
         add(start);
         start.setBounds(100, 200, 400, 100);
   add(button);
+  add(lap);
+  lap.setBounds(200,0,200,200);
         button.setBounds(175,300,200,200);
        
         button.setBackground(Color.YELLOW);
+        lap.setFont(new Font("BOLD",Font.HANGING_BASELINE,30));
             button.addActionListener(this);
             start.setFont(new Font("BOLD",Font.HANGING_BASELINE,40));
             button.setFont(new Font("BOLD",Font.BOLD,15));
@@ -116,6 +119,7 @@ JPanel panel=new JPanel();
     public void actionPerformed(ActionEvent e) {
         if(button.getText()=="STOP"){
             trd.stopper=1;
+            lap.setText(trd.label.getText());
         }
         else if(button.getText()=="START") {
        trd.stopper=0;
@@ -134,3 +138,4 @@ JPanel panel=new JPanel();
        s.setLocation(700,200);
       
     }
+}
