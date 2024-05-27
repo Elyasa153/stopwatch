@@ -16,11 +16,13 @@ class trd  implements Runnable{
         int stopper=2;
     int dakika=0;
     int saat=0;
+    int pauser=0;
     @Override
     public void run(){
          try {
              
              while(stopper==0){
+                
                  if(dakika%60==0&&dakika!=0){
                     saat++;
                     dakika=0;
@@ -59,11 +61,11 @@ class trd  implements Runnable{
                      label.setText(saat+":"+dakika+":"+sayac);
                     
                  }
-                 
+                 while(pauser==1){
+                     System.out.print("");                 }
         
          sayac++;
                  Thread.sleep(1000);
-
              }
      } catch (Exception e) {
      }
@@ -74,23 +76,36 @@ class trd  implements Runnable{
 public class Stopwatch extends JFrame implements Runnable,ActionListener {
     JLabel start=new JLabel("PRESS TO START");
 JButton button=new JButton("START");
+JButton button2=new JButton("LAP");
+JButton button3=new JButton("PAUSE");
+
 JLabel lap=new JLabel("");
+JLabel lap2=new JLabel("");
+JLabel lap3=new JLabel("");
+
     int sayac=0;
   trd trd=new trd();
   public Stopwatch(){
         setLayout(null);
+        add(button2);
+        button2.setBounds(225,300,150,150);
+        button2.addActionListener(this);
+        add(button3);
+        button3.setBounds(25,300,150,150);
+        button3.addActionListener(this);
         add(start);
         start.setBounds(100, 200, 400, 100);
   add(button);
   add(lap);
   lap.setBounds(200,0,200,200);
-        button.setBounds(175,300,200,200);
-       
-        button.setBackground(Color.YELLOW);
+        button.setBounds(425,300,150,150);
+       add(lap2);
+       lap2.setBounds(200,75,200,200);
         lap.setFont(new Font("BOLD",Font.HANGING_BASELINE,30));
+        lap2.setFont(new Font("BOLD",Font.HANGING_BASELINE,30));
             button.addActionListener(this);
             start.setFont(new Font("BOLD",Font.HANGING_BASELINE,40));
-            button.setFont(new Font("BOLD",Font.BOLD,15));
+            button.setFont(new Font("BOLD",Font.BOLD,20));
   }
   @Override
   public void run(){
@@ -102,14 +117,12 @@ JLabel lap=new JLabel("");
          trd.saat=0;
          trd.dakika=0;
          trd.sayac=0;
-         
       }
-      
       while(trd.stopper==0){
      start.setText("");
      button.setText("STOP");
         add(trd.label);
-        trd.label.setBounds(200,200,300,100);
+        trd.label.setBounds(175,200,300,100);
         trd.label.setFont(new Font("ITALIC",Font.ITALIC,50));
          trd.run();
       }
@@ -117,12 +130,30 @@ JLabel lap=new JLabel("");
   }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==button){
         if(button.getText()=="STOP"){
             trd.stopper=1;
-            lap.setText(trd.label.getText());
         }
         else if(button.getText()=="START") {
        trd.stopper=0;
+        }
+        }
+        else if(e.getSource()==button2){
+            if(!lap.getText().equals("")){
+                lap2.setText("2."+lap.getText().substring(2));
+                lap.setText("1."+trd.label.getText());
+            }
+            lap.setText("1."+trd.label.getText());
+        }
+        else if(e.getSource()==button3&&button3.getText().equals("PAUSE")){
+           
+            trd.pauser=1;
+            button3.setText("UNPAUSE");
+           
+        }
+        else if(e.getSource()==button3&&button3.getText().equals("UNPAUSE")){
+            trd.pauser=0;
+            button3.setText("PAUSE");
         }
     }
  
@@ -136,6 +167,5 @@ JLabel lap=new JLabel("");
         s.setDefaultCloseOperation(EXIT_ON_CLOSE);
        s.setTitle("Chronometer");
        s.setLocation(700,200);
-      
     }
 }
