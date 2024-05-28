@@ -1,3 +1,4 @@
+
 package stopwatch;
 
 import java.awt.Color;
@@ -29,13 +30,10 @@ class trd  implements Runnable{
                     saat++;
                     dakika=0;
                     sayac=0;
-                   
-                    label.setText("0"+saat+":0"+dakika+":0"+sayac);
                 }
                  if(sayac%60==0&&sayac!=0){
                this.dakika++;
                sayac=0;
-              label.setText(dakika+":"+sayac);
           }
                  if(saat<10&&sayac<10&&dakika<10){
                      label.setText("0"+saat+":0"+dakika+":0"+sayac);
@@ -66,19 +64,15 @@ class trd  implements Runnable{
              }
      } catch (Exception e) {
      }
-    
     }
-   
 }
 public class Stopwatch extends JFrame implements Runnable,ActionListener {
     JLabel start=new JLabel("PRESS TO START");
 JButton button=new JButton("START");
 JButton button2=new JButton("LAP");
 JButton button3=new JButton("PAUSE");
-
 JLabel lap=new JLabel("1.00:00:00");
 JLabel lap2=new JLabel("2.00:00:00");
-
     int sayac=0;
   trd trd=new trd();
   public Stopwatch(){
@@ -145,14 +139,12 @@ JLabel lap2=new JLabel("2.00:00:00");
            
             trd.pauser=1;
             button3.setText("UNPAUSE");
-           
         }
         else if(e.getSource()==button3&&button3.getText().equals("UNPAUSE")){
             trd.pauser=0;
             button3.setText("PAUSE");
         }
     }
- 
     public static void main(String[] args) {
         Stopwatch s=new Stopwatch();
         Thread thread2=new Thread(s);
