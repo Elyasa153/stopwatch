@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 
 class trd  implements Runnable{
         JLabel label=new JLabel("");
-        boolean bool=false;
         int sayac=0;
         int stopper=2;
     int dakika=0;
@@ -24,7 +23,8 @@ class trd  implements Runnable{
              
              while(stopper==0){
                 while(pauser==1){
-                     System.out.print("");                 }
+                     System.out.print("");     
+                }
                  if(dakika%60==0&&dakika!=0){
                     saat++;
                     dakika=0;
@@ -39,7 +39,6 @@ class trd  implements Runnable{
           }
                  if(saat<10&&sayac<10&&dakika<10){
                      label.setText("0"+saat+":0"+dakika+":0"+sayac);
-                     
                  }
                  else if(saat<10&&sayac<10&&dakika>=10){
                      label.setText("0"+saat+":"+dakika+":0"+sayac);
@@ -61,10 +60,7 @@ class trd  implements Runnable{
                  }
                  else if(saat>=10&&sayac>=10&&dakika>=10){
                      label.setText(saat+":"+dakika+":"+sayac);
-                    
                  }
-                 
-        
          sayac++;
                  Thread.sleep(1000);
              }
@@ -131,10 +127,10 @@ JLabel lap2=new JLabel("2.00:00:00");
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==button){
-        if(button.getText()=="STOP"){
+        if(button.getText().equals("STOP")){
             trd.stopper=1;
         }
-        else if(button.getText()=="START") {
+        else if(button.getText().equals("START")) {
        trd.stopper=0;
         }
         }
@@ -167,6 +163,5 @@ JLabel lap2=new JLabel("2.00:00:00");
         s.setDefaultCloseOperation(EXIT_ON_CLOSE);
        s.setTitle("Chronometer");
        s.setLocation(700,200);
-       
     }
 }
