@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 class trd  implements Runnable{
         JLabel label=new JLabel("");
         boolean bool=false;
@@ -22,7 +23,8 @@ class trd  implements Runnable{
          try {
              
              while(stopper==0){
-                
+                while(pauser==1){
+                     System.out.print("");                 }
                  if(dakika%60==0&&dakika!=0){
                     saat++;
                     dakika=0;
@@ -61,8 +63,7 @@ class trd  implements Runnable{
                      label.setText(saat+":"+dakika+":"+sayac);
                     
                  }
-                 while(pauser==1){
-                     System.out.print("");                 }
+                 
         
          sayac++;
                  Thread.sleep(1000);
@@ -79,9 +80,8 @@ JButton button=new JButton("START");
 JButton button2=new JButton("LAP");
 JButton button3=new JButton("PAUSE");
 
-JLabel lap=new JLabel("");
-JLabel lap2=new JLabel("");
-JLabel lap3=new JLabel("");
+JLabel lap=new JLabel("1.00:00:00");
+JLabel lap2=new JLabel("2.00:00:00");
 
     int sayac=0;
   trd trd=new trd();
@@ -167,5 +167,6 @@ JLabel lap3=new JLabel("");
         s.setDefaultCloseOperation(EXIT_ON_CLOSE);
        s.setTitle("Chronometer");
        s.setLocation(700,200);
+       
     }
 }
